@@ -1,0 +1,22 @@
+close all; clear all;
+R=30;
+L=6e-3;
+K=50e-3;
+J=40e-6;
+B=35e-6;
+
+Kp=100;
+Ki=0.1;
+Kd=50;%越大越快
+
+S1=tf([K],[L R]);
+S2=tf([1],[J B]);
+S3=series(S1,S2);%串連
+S4=feedback(S3,K,-1);%回授
+S5=tf([1],[1 0]);
+S6=series(S4,S5);
+S7=tf([Kd Kp Ki],[1 0]);
+S8=series(S7,S6);
+
+sys1=feedback(S8,1,-1)
+step(sys1,0.1)
