@@ -25,14 +25,14 @@ figure;box on;
 subplot(3,1,1);plot(t(1:index),Ec(1:index))
 xlabel('time(sec)')
 ylabel('Ec(t)')
-axis([0 t_d min(Ec) 1.1 max(Ec) 1.1])
+axis("0 t_d min(Ec) 1.1 max(Ec) 1.1")
 
 subplot(3,1,2);plot(t(1:index),I(1:index))
 xlabel('time(sec)')
 ylabel('I(t)l')
-axis([0 t_d min(I) 1.1 max(I) 1.1])
+axis("0 t_d min(I) 1.1 max(I) 1.1")
 
 subplot(3,1,3);plot(t(1:index),E(1:index))
 xlabel('time(sec)')
-ylabel('E9t)')
-axis([0 t_d min(E) 1.1 max(E) 1.1])
+ylabel('E(t)')
+axis("0 t_d min(E) 1.1 max(E) 1.1")
