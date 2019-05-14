@@ -1,0 +1,38 @@
+clear all;close all;
+R=30;L=6e-3;K=50e-3;B=35e-6;J=40e-6;
+dt=1e-4;Td=0.1;
+i=0;
+W=0;
+I=0;
+Q=0;
+E=1;
+KP=10;%控制器
+KI=20;
+RR=0;%控制器
+CI=0;
+for t=0:dt:Td%轉速
+  i=i+1;
+  if i<500
+    RR(i)=10;
+  else
+    RR(i)=-5;
+end
+  T(i)=t;
+  err=RR(i)-W(i);%控制器
+  CI(i+1)=err*K*dt+CI(i);
+  E(i)=err*KP+CI(i);%控制器
+  TL(i)=0;
+  I(i+1)=(-R/L*I(i)+1/L*E(i)-1/L*K*W(i))*dt+I(i);
+  W(i+1)=(-B/J*W(i)-1/J*TL(i)+1/J*K*I(i))*dt+W(i);
+  Q(i+1)=W(i)*dt+Q(i);
+endfor
+Len=length(T);
+plot(T,W(1:Len))
+xlabel('time(sec)')
+ylabel('\omega(t)(red/sec)')
+figure
+plot(T,I(1:Len))
+xlabel('time(sec)')
+ylabel('r(t)(A)')
+figure
+plot(T,Q(1:Len))
