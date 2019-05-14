@@ -1,0 +1,31 @@
+clear all;close all;
+R=1;L=0.5;K=0.01;B=0.1;J=0.01;
+dt=1e-3;Td=3;
+i=0;
+W=0;
+I=0;
+Q=0;
+E=1;
+KP=10;%控制器
+RR=0;%控制器
+for t=0:dt:Td
+  i=i+1;
+  RR(i)=1;%控制器
+  T(i)=t;
+  err=RR(i)-W(i);%控制器
+  E(i)=err*KP;%控制器
+  TL(i)=0;
+  I(i+1)=(-R/L*I(i)+1/L*E(i)-1/L*K*W(i))*dt+I(i);
+  W(i+1)=(-B/J*W(i)-1/J*TL(i)+1/J*K*I(i))*dt+W(i);
+  Q(i+1)=W(i)*dt+Q(i);
+endfor
+Len=length(T);
+plot(T,W(1:Len))
+xlabel('time(sec)')
+ylabel('\omega(t)(red/sec)')
+figure
+plot(T,I(1:Len))
+xlabel('time(sec)')
+ylabel('r(t)(A)')
+figure
+plot(T,Q(1:Len))
