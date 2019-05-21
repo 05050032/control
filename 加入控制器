@@ -10,7 +10,7 @@ KP=10;%控制器
 RR=0;%控制器
 for t=0:dt:Td
   i=i+1;
-  RR(i)=1;%控制器
+  RR(i)=1;%控制器(如果是輸入弦波"=sin(2*pi*t)")
   T(i)=t;
   err=RR(i)-W(i);%控制器
   E(i)=err*KP;%控制器
