@@ -1,0 +1,13 @@
+clear all
+% select values of m, d, r, and J
+%Step input
+g=10;
+J=10;
+M=1;
+D=0.5;
+R=1;
+L=5;
+G=tf([M*g*D],[L*(J/R^2+M) 0 0])
+step(G,10)
+xlabel( 'Time(sec)');
+ylabel('Amplitude'); 
